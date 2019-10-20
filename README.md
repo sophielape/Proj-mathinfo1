@@ -70,33 +70,37 @@ Propagation : l'idée est de parcourir l'un des cotés de notre carré et de rel
     
     
     
- Contour complexe
+ Contour complexe : on modifie la fonctions find_seed pour l'adapter à n'importe quel rectangle de mesure. Le fonctionnement de notre code est alors de quadriller notre espace en rectangles élémentaires, puis de reprendre le même déroulement que pour "simple_contour" pour chaque rectangle de notre quadrillage. On obtient alors une vue d'ensemble de notre espace avec la ligne de niveau concernée.
  
     xc=np.arange(0.0,1.0,0.01)
     yc=np.arange(0.0,1.0, 0.01)
 
     def contour(f, xc, yc,c=0.0, delta=0.01):
+    Yfinal=[]
+    Xfinal=[]
     
     for i in range (1, len(xc)):
-        Xquadr=np.arange(xc[i-1], xc[i], delta)
+    
+        Xquadr=np.arange(xc[i-1], xc[i], alpha=0.001)
         
         for j in range(1,len(yc)):
-            Yquadr=np.arange(yc[j-1], yc[j])
-            
+            Yquadr=np.arange(yc[j-1], yc[j],alpha=0.001)
+            y0=yc[j-1]
+            Ylocal=[]
             for x0 in Xquadr:
-                y0=yc[j]
                 y0=find_seed3(x0,y0, g, yc[j+1], yc[j])
+                Ylocal.append(y0)
+            s=0
+            Y=[]
     
-                s=0
-                Yfinal=[]
-    
-                while y0!= None and s<len(Y):
-                    Yfinal.append(y0)
-                    s=s+1
-                    y0=Y[s]
-
-  
-    return X[:len(Yfinal)],Yfinal
+            while y0!= None and s<len(Ylocal):
+                Y.append(y0)
+                s=s+1
+                y0=Ylocal[s]
+            Yfinal.append(Y)
+        Xfinal.append(Xquadr)
+    return Xfinal, Yfinal
+       
     
 
     def find_seed3(x, y ,g, valmax, valmin, c=0, eps=2**(-26)):
@@ -107,7 +111,7 @@ Propagation : l'idée est de parcourir l'un des cotés de notre carré et de rel
     if c>max or c<min:
         return None
     
-    while abs(g(x,y))>eps:
+    while abs(g(x,y)-c)>eps:
         
         if y>valmax or y<valmin:
                 return None
