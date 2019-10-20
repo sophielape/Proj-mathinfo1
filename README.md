@@ -69,3 +69,55 @@ Propagation : l'idée est de parcourir l'un des cotés de notre carré et de rel
         y= y - (g(x,y)/deriv(g,x,y))
         
     return y
+    
+    
+    
+ Contour complexe
+ 
+    xc=np.arange(0.0,1.0,0.01)
+    yc=np.arange(0.0,1.0, 0.01)
+
+    def contour(f, xc, yc,c=0.0, delta=0.01):
+    
+    for i in range (1, len(xc)):
+        Xquadr=np.arange(xc[i-1], xc[i], delta)
+        
+        for j in range(1,len(yc)):
+            Yquadr=np.arange(yc[j-1], yc[j])
+            
+            for x0 in Xquadr:
+                y0=yc[j]
+                y0=find_seed3(x0,y0, g, yc[j+1], yc[j])
+    
+                s=0
+                Yfinal=[]
+    
+                while y0!= None and s<len(Y):
+                    Yfinal.append(y0)
+                    s=s+1
+                    y0=Y[s]
+
+  
+    return X[:len(Yfinal)],Yfinal
+    
+
+    def find_seed3(x, y ,g, valmax, valmin, c=0, eps=2**(-26)):
+    
+    max=max(g(x,valmin), g(x,valmax))
+    min=min(g(x,valmin), g(x,valmax))
+    
+    if c>max or c<min:
+        return None
+    
+    while abs(g(x,y))>eps:
+        
+        if y>valmax or y<valmin:
+                return None
+                
+        y= y - (g(x,y)/deriv(g,x,y))
+    
+    return y
+    
+    
+    
+    
