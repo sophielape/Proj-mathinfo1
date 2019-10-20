@@ -7,7 +7,7 @@ Amorce : Si on pose g : t |--> f(0,t) définie sur [0;1]. Avec l'hypothèse de f
 
 
     def find_seed(g, c=0, eps=2**(-26)):
-     y0=0
+     t=0
      
     max=max(g(0,1), g(0,0))
     min=min(g(0,1), g(0,0))
@@ -15,11 +15,11 @@ Amorce : Si on pose g : t |--> f(0,t) définie sur [0;1]. Avec l'hypothèse de f
     if c>max or c<min:
         return None
     
-     while abs(g(0,y0))>eps:
+     while abs(g(0,t))>eps:
         
-        y0= y0 - (g(0,y0)/deriv(g,y0))
+        t= t - (g(0,t)/deriv(g,t))
         
-     return y0
+     return t
      
      
      
