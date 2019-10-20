@@ -5,8 +5,8 @@ Amorce : Si on pose g : t |--> f(0,t) définie sur [0;1]. Avec l'hypothèse de f
  Donc avec le théorème des valeurs intermédiaires appliquées à g, il semble raisonnable de fixer f(0;0)<c<f(0;1) pour être certain d'obtenir t appartenant à [0;1] tel que f(0;t)=c
 
 
-def find_seed(g, c=0, eps=2**(-26)):
-    
+
+    def find_seed(g, c=0, eps=2**(-26)):
     y0=0
     
     while abs(g(O,y0))>eps:
