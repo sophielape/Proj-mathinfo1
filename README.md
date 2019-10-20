@@ -39,9 +39,15 @@ Propagation : l'idée est de parcourir l'un des cotés de notre carré et de rel
     
       for x0 in X:
           Y.append(find_seed2(x0,g))
-    
-      if None in Y:
-          return [],[]
+          
+          
+      while y0!= None and s<len(Y):
+          Yfinal.append(y0)
+          s=s+1
+          y0=Y[s]
+
+  
+    return X[:len(Yfinal)],Yfinal
     
       return X,Y
     
