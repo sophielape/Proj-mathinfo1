@@ -15,7 +15,7 @@ Amorce : Si on pose g : t |--> f(0,t) définie sur [0;1]. Avec l'hypothèse de f
     if c>max or c<min:
         return None
     
-     while abs(g(0,t))>eps:
+     while abs(g(0,t)-c)>eps:
         
         t= t - (g(0,t)/deriv(g,t))
         
