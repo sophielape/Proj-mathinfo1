@@ -21,11 +21,12 @@ Amorce : Si on pose g : t |--> f(0,t) définie sur [0;1]. Avec l'hypothèse de f
         
      return t
      
+ On choisit la méthode de Newton corrigée par c pour trouver le  de la fonction auxiliaire h=g-c. On obtient donc un 0 correspondant (ou pas).     
      
-     
-     
-    def deriv2(g,x):
+    def deriv2(g,x,y):
      h=10**(-10)
-     a=g(0,x+h)-g(0,x-h)
+     a=g(x,y+h)-g(x,y-h)
      return a/(2*h)
+     
+Propagation : l'idée est de parcourir l'un des cotés de notre carré et de relever un point de la ligne de niveau à chaque "arret" sur ce coté, arrêts espacés de delta. Pour ceci, il nous faut modifier nos fonctions ci dessus pour se déplacer librement sur la première coordonnée de f sans rester bloqué sur 0. Pour respecter la proximité de delta au niveau de x et y, on initialise une première valeur de coordonnées de la ligne de niveau, puis on se place dans un intervalle autour de la première valeur de y au lieu de rester sur [0;1]. Ceci permet également de palier au problème rencontré si notre ligne de niveau fait un "lacet", ce qui engendrerait deux valeurs possibles de y pour un même x. Dans ce cas, nos tableaux n'auraient pas forcément présenté de continuité sur la ligne de niveau. 
     
