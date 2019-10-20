@@ -30,3 +30,37 @@ Amorce : Si on pose g : t |--> f(0,t) définie sur [0;1]. Avec l'hypothèse de f
      
 Propagation : l'idée est de parcourir l'un des cotés de notre carré et de relever un point de la ligne de niveau à chaque "arret" sur ce coté, arrêts espacés de delta. Pour ceci, il nous faut modifier nos fonctions ci dessus pour se déplacer librement sur la première coordonnée de f sans rester bloqué sur 0. Pour respecter la proximité de delta au niveau de x et y, on initialise une première valeur de coordonnées de la ligne de niveau, puis on se place dans un intervalle autour de la première valeur de y au lieu de rester sur [0;1]. Ceci permet également de palier au problème rencontré si notre ligne de niveau fait un "lacet", ce qui engendrerait deux valeurs possibles de y pour un même x. Dans ce cas, nos tableaux n'auraient pas forcément présenté de continuité sur la ligne de niveau. 
     
+
+    def simple_contour(f, c=0.0, delta=0.01):
+    
+      X=np.arange(0,1, delta)
+      Y=[]
+    
+    
+      for x0 in X:
+          Y.append(find_seed2(x0,g))
+    
+      if None in Y:
+          return [],[]
+    
+      return X,Y
+    
+        
+    
+    def find_seed2(x,g, c=0, eps=2**(-26), delta=0.01):
+    
+      max=max(g(x,y0-delta), g(x,y0+delta))
+      min=min(g(x,y0-delta), g(x,y0+delta))
+    
+      if c>max or c<min:
+         return None
+    
+      y0=0
+    
+      while abs(g(x,y0))>eps:
+        
+          y0= y0 - (g(x,y0)/deriv(g,x,y0))
+        
+      return y0
+    
+    
