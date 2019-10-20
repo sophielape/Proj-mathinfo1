@@ -35,7 +35,7 @@ Propagation : l'idée est de parcourir l'un des cotés de notre carré et de rel
     
     X=np.arange(0,1, delta)
     y0=0
-    Y=[y0]
+    Y=[]
     
     for x0 in X:
         y0=find_seed2(x0,y0, g)
