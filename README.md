@@ -17,7 +17,7 @@ Amorce : Si on pose g : t |--> f(0,t) définie sur [0;1]. Avec l'hypothèse de f
     
      while abs(g(0,t)-c)>eps:
         
-        t= t - (g(0,t)/deriv(g,t))
+        t= t - (g(0,t)/deriv(g,0, t))
         
      return t
      
