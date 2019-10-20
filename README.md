@@ -46,12 +46,9 @@ Propagation : l'idée est de parcourir l'un des cotés de notre carré et de rel
           s=s+1
           y0=Y[s]
 
-  
-    return X[:len(Yfinal)],Yfinal
+     return X[:len(Yfinal)],Yfinal
     
-      return X,Y
-    
-        
+         
     
     def find_seed2(x,g, c=0, eps=2**(-26), delta=0.01):
     
