@@ -33,8 +33,7 @@ Propagation : l'idée est de parcourir l'un des cotés de notre carré et de rel
 
     def simple_contour(f, c=0.0, delta=0.01):
     
-    X=np.arange(0,1, delta)
-    X=[]
+    X=np.arange(0,1, delta
     y0=0
     Y=[y0]
     
