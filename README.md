@@ -33,37 +33,40 @@ Propagation : l'idée est de parcourir l'un des cotés de notre carré et de rel
 
     def simple_contour(f, c=0.0, delta=0.01):
     
-      X=np.arange(0,1, delta)
-      Y=[]
+    X=np.arange(0,1, delta)
+    X=[]
+    y0=0
+    Y=[y0]
     
     
-      for x0 in X:
-          Y.append(find_seed2(x0,g))
-          
-          
-      while y0!= None and s<len(Y):
-          Yfinal.append(y0)
-          s=s+1
-          y0=Y[s]
+    for x0 in X:
+        y0=find_seed2(x0,y0, g)
+        Y.append(y0)
+        
+    
+    s=0
+    Yfinal=[]
+    
+    while y0!= None and s<len(Y):
+        Yfinal.append(y0)
+        s=s+1
+        y0=Y[s]
 
-     return X[:len(Yfinal)],Yfinal
+  
+    return X[:len(Yfinal)],Yfinal
     
-         
-    
-    def find_seed2(x,g, c=0, eps=2**(-26), delta=0.01):
-    
-      max=max(g(x,y0-delta), g(x,y0+delta))
-      min=min(g(x,y0-delta), g(x,y0+delta))
-    
-      if c>max or c<min:
-         return None
-    
-      y0=0
-    
-      while abs(g(x,y0))>eps:
         
-          y0= y0 - (g(x,y0)/deriv(g,x,y0))
+    
+    def find_seed2(x, y ,g, c=0, eps=2**(-26), delta=0.01):
+    
+    max=max(g(x,y-delta), g(x,y+delta))
+    min=min(g(x,y-delta), g(x,y+delta))
+    
+    if c>max or c<min:
+        return None
+    
+    while abs(g(x,y))>eps:
         
-      return y0
-    
-    
+        y= y - (g(x,y)/deriv(g,x,y))
+        
+    return y
